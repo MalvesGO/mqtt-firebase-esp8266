@@ -1,0 +1,35 @@
+<div class="row" style="padding-top: 1.5cm">
+    <h2 class="text-center branco"><strong>Produtos disponíveis em nossa loja</strong></h2>
+</div>
+<br>
+
+<div class="container-fluid cards-row" ng-controller="produtoController as produtos">
+
+    <div class="col-md-12">
+        <div ng-repeat="item in produto.produtos | filter:busca">
+            <div ng-class="{'clearfix': $index%3 === 0}"></div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img class="img-responsive" style="max-height:220px" src="{{ item.img }}">
+                    <div class="caption">
+                        <h3 class="text-center">{{ item.nome }}</h3>
+                        <p class="card-description">{{item.descricao}}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Valor</h4>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <h4><strong>R$ {{ item.valor }}</strong></h4>
+                            </div>
+                        </div>
+                        <a mp-mode="dftl" href="{{item.linkPgto}}" name="MP-payButton" class='btn btn-success center-block'>Comprar</a>
+                        <script type="text/javascript">
+                            (function(){function $MPC_load(){window.$MPC_loaded !== true && (function(){var s = document.createElement("script");s.type = "text/javascript";s.async = true;s.src = document.location.protocol+"//secure.mlstatic.com/mptools/render.js";var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);window.$MPC_loaded = true;})();}window.$MPC_loaded !== true ? (window.attachEvent ?window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;})();
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

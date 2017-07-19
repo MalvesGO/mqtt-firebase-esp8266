@@ -1,0 +1,98 @@
+<div class="row" style="padding-top: 1.5cm">
+	<h2 class="branco text-center" ng-if="cliente.type == 'create'"><strong>Cadastrar novo cliente</strong></h2>
+	<h2 class="branco text-center" ng-if="cliente.type == 'edit'"><strong>Editar cliente</strong></h2>
+</div>
+
+<div class ="container">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Informe os dados do cliente</div>
+		<div class="panel-body">
+			<form name="userForm" novalidate ng-submit="cliente.saveCliente()">
+
+				<div class="form-group" ng-class="{ 'has-error': userForm.nome.$touched && userForm.nome.$invalid }">
+					<label>Nome</label>
+					<input type="text" name="nome" class="form-control"
+						   ng-model="cliente.clienteData.nome"
+						   ng-minlength="5"
+						   ng-maxlength="30"
+						   required>
+
+					<div class="help-block" ng-messages="userForm.nome.$error" ng-if="userForm.nome.$touched">
+						<div ng-messages-include="app/views/pages/partials/messages.html"></div>
+					</div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': userForm.telefone.$touched && userForm.telefone.$invalid }">
+					<label>Telefone</label>
+					<input type="text" name="telefone" class="form-control"
+						   ng-model="cliente.clienteData.telefone"
+						   ng-minlength="5"
+						   ng-maxlength="20"
+						   required>
+
+					<div class="help-block" ng-messages="userForm.telefone.$error" ng-if="userForm.telefone.$touched">
+						<div ng-messages-include="app/views/pages/partials/messages.html"></div>
+					</div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': userForm.email.$touched && userForm.email.$invalid }">
+					<label>Email</label>
+					<input type="email" name="email" class="form-control"
+						   ng-model="cliente.clienteData.email"
+						   ng-minlength="5"
+						   ng-maxlength="30"
+						   required>
+
+					<div class="help-block" ng-messages="userForm.email.$error" ng-if="userForm.email.$touched">
+						<div ng-messages-include="app/views/pages/partials/messages.html"></div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Assunto</label>
+					<div class="input-group email">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input type="text" class="form-control" ng-model="cliente.clienteData.assunto" placeholder="Enter email">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Mensagem</label>
+					<div class="input-group email">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input type="text" class="form-control" ng-model="cliente.clienteData.mensagem" placeholder="Enter email">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Imagem</label>
+					<div class="input-group email">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input type="text" class="form-control" ng-model="cliente.clienteData.img" placeholder="Enter image">
+					</div>
+				</div>
+
+
+				<button ng-disabled="userForm.$invalid" type="submit" class="btn btn-success btn-lg btn-block" ng-if="cliente.type == 'create'">Cadastrar Cliente</button>
+				<button ng-disabled="userForm.$invalid" type="submit" class="btn btn-success btn-lg btn-block" ng-if="cliente.type == 'edit'">Atualizar Cliente</button>
+
+				<br>
+
+				<div class="alert alert-success" role="alert" ng-show="cliente.message">
+					<strong>{{ cliente.message }}</strong>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

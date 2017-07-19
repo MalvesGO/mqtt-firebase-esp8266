@@ -1,0 +1,62 @@
+<div class="row" style="padding-top: 1.5cm">
+    <h2 class="text-center branco"><strong>Temperaturas</strong></h2>
+</div>
+
+<br>
+
+<div class="container-fluid cards-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="person in cliente.clientes | filter:busca">
+                <div class="thumbnail">
+                    <img class="responsive-img" src="{{ person.img }}">
+                    <div class="caption">
+                        <h3 class="text-center">{{ person.nome }}</h3>
+                        <p class="card-description"><strong>Bootstrap Thumbnail</strong> Customization Example. Here are customized <strong>bootstrap cards</strong>. We just apply some box shadow and remove border radius.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Comprar</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="info">
+
+                        <th>Temperatura</th>
+                        <th>Umidade</th>
+                        <th>Horário</th>
+                        <th>Data</th>
+                        <th>Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="data in home.temperaturas | filter:busca">
+                        <td>{{ data.temperatura }} C</td>
+                        <td>{{ data.umidade }} %</td>
+                        <td>{{ data.hora }} hs</td>
+                        <td>{{ data.data }}</td>
+                        <td><a ng-click="home.deleteTemperatura(data._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

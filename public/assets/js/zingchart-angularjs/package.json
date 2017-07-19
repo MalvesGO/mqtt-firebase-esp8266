@@ -1,0 +1,80 @@
+{
+  "_args": [
+    [
+      "zingchart-angularjs",
+      "/home/marcelo/WebstormProjects/17-user-crm"
+    ]
+  ],
+  "_from": "zingchart-angularjs@latest",
+  "_id": "zingchart-angularjs@1.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/zingchart-angularjs",
+  "_nodeVersion": "6.1.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/zingchart-angularjs-1.2.0.tgz_1472512277206_0.9170724984724075"
+  },
+  "_npmUser": {
+    "email": "support@zingchart.com",
+    "name": "zingchart"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "zingchart-angularjs",
+    "raw": "zingchart-angularjs",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/zingchart-angularjs/-/zingchart-angularjs-1.2.0.tgz",
+  "_shasum": "d6e7d9cabbbd79120fd9bc123abca4e325aa2aab",
+  "_shrinkwrap": null,
+  "_spec": "zingchart-angularjs",
+  "_where": "/home/marcelo/WebstormProjects/17-user-crm",
+  "author": {
+    "name": "ZingChart"
+  },
+  "dependencies": {
+    "angular": "^1.3.14"
+  },
+  "description": "A ZingChart AngularJS directive",
+  "devDependencies": {
+    "angular-mocks": "^1.3.14",
+    "chai": "^2.1.0",
+    "jquery": "^2.1.3",
+    "karma": "^1.1.2",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^1.0.2",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "mocha": "^2.1.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "d6e7d9cabbbd79120fd9bc123abca4e325aa2aab",
+    "tarball": "https://registry.npmjs.org/zingchart-angularjs/-/zingchart-angularjs-1.2.0.tgz"
+  },
+  "gitHead": "4e413d146d08ffd0fd089c1c46b9299a951a6dd2",
+  "homepage": "http://www.zingchart.com",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "zingchart",
+      "email": "support@zingchart.com"
+    }
+  ],
+  "name": "zingchart-angularjs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+  },
+  "version": "1.2.0"
+}

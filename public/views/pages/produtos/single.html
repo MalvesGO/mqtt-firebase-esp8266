@@ -1,0 +1,85 @@
+<div class="row" style="padding-top: 1.5cm">
+	<h2 class="branco text-center" ng-if="produto.type == 'create'"><strong>Cadastrar novo produto</strong></h2>
+	<h2 class="branco text-center" ng-if="produto.type == 'edit'"><strong>Editar produto</strong></h2>
+</div>
+
+<div class ="container">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Informe os dados do produto</div>
+		<div class="panel-body">
+			<form name="produtoForm" novalidate ng-submit="produto.saveProduto()">
+
+				<div class="form-group" ng-class="{ 'has-error': produtoForm.nome.$touched && produtoForm.nome.$invalid }">
+					<label>Nome</label>
+					<input type="text" name="nome" class="form-control"
+						   ng-model="produto.produtoData.nome"
+						   ng-minlength="5"
+						   ng-maxlength="70"
+						   required>
+
+					<div class="help-block" ng-messages="produtoForm.nome.$error" ng-if="produtoForm.nome.$touched">
+						<div ng-messages-include="app/views/pages/partials/messages.html"></div>
+					</div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': produtoForm.descricao.$touched && produtoForm.descricao.$invalid }">
+					<label>Descrição</label>
+					<input type="text" name="descricao" class="form-control"
+						   ng-model="produto.produtoData.descricao"
+						   ng-minlength="5"
+						   ng-maxlength="30"
+						   required>
+
+					<div class="help-block" ng-messages="produtoForm.descricao.$error" ng-if="produtoForm.descricao.$touched">
+						<div ng-messages-include="app/views/pages/partials/messages.html"></div>
+					</div>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': produtoForm.valor.$touched && produtoForm.valor.$invalid }">
+					<label>Valor</label>
+					<input type="text" name="valor" class="form-control"
+						   ng-model="produto.produtoData.valor"
+						   required>
+				</div>
+
+				<div class="form-group">
+					<label>Link Mercado Pago</label>
+					<div class="input-group email">
+						<span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" class="form-control" ng-model="produto.produtoData.linkPgto" placeholder="Informe o link de pagamento">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Imagem</label>
+					<div class="input-group email">
+						<span class="input-group-addon"><i class="fa fa-envelope"></i></span><input type="text" class="form-control" ng-model="produto.produtoData.img" placeholder="Informe o link da imagem">
+					</div>
+				</div>
+
+
+				<button ng-disabled="produtoForm.$invalid" type="submit" class="btn btn-success btn-lg btn-block" ng-if="produto.type == 'create'">Cadastrar produto</button>
+				<button ng-disabled="produtoForm.$invalid" type="submit" class="btn btn-success btn-lg btn-block" ng-if="produto.type == 'edit'">Atualizar Produto</button>
+
+				<br>
+
+				<div class="alert alert-success" role="alert" ng-show="produto.message">
+					<strong>{{ produto.message }}</strong>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+

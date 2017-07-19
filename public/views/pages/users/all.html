@@ -1,0 +1,63 @@
+<div class="row" style="padding-top: 1.5cm">
+    <h2 class="text-center branco"><strong>Listagem de Usuários do Sistema</strong></h2>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="panel-title padFix">Clientes cadastrados no momento: <span class="badge">{{ user.users.length }}</span></h3></div>
+                    <div class="col-sm-6">
+                        <form role="search">
+                            <div class="input-group">
+                                <input type="text"  class="form-control" ng-model="busca.name " placeholder="Buscar Usuário...">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="jumbotron text-center" ng-show="user.processing">
+                    <span class="glyphicon glyphicon-repeat spinner"></span>
+                    <p>Carregando Usuários...</p>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="info">
+                        <th>Editar</th>
+                        <th>Nome</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in user.users | filter:busca">
+                        <td><a ng-href="/users/{{ person._id }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.username }}</td>
+                        <td>{{ person.email }}</td>
+                        <td class="col-sm-2">
+                            <a ng-click="user.deleteUser(person._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/users/create" class="btn btn-success center-block">Novo Usuário</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

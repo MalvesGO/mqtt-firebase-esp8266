@@ -1,0 +1,390 @@
+
+<div class="row jumbotron" style="padding-top: 1.5cm" ng-controller="firebaseController">
+
+    <div class="container" ng-controller="mqttController">
+
+        <div class="box-body table-responsive no-padding" >
+            <div class="box-header">
+                <h3 class="box-title">Serviços sendo Monitorados </h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua">
+                            <img class="img-responsive" src="http://icon-icons.com/icons2/691/PNG/128/google_firebase_icon-icons.com_61475.png" alt="">
+                        </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Firebase</span>
+                            <span ng-class="{
+                    'label label-success': statusFirebase === 'Conectado',
+                    'label label-warning': statusFirebase === 'Conectando ao servidor Firebase......',
+                    'label label-danger': statusFirebase == 'Conexão Perdida'}">
+                    {{statusFirebase}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua">
+                             <img class="img-responsive" src="https://cdn6.aptoide.com/imgs/1/c/a/1caec56397fc9c9a26f35c1e0892e9d0_icon.png?w=256" alt="">
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Mqtt</span>
+                            <span ng-class="{
+                    'label label-success': statusMqtt === 'Conectado',
+                    'label label-warning': statusMqtt === 'Conectando ao servidor Mqtt...',
+                    'label label-danger': statusMqtt == 'Desconectado'}">
+                    {{statusMqtt}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Registro</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr class="info">
+
+                            <th>Temperatura</th>
+                            <th>Umidade</th>
+                            <th>Horário</th>
+                            <th>Data</th>
+                            <th>Excluir</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}
+                        <tr ng-repeat="item in dados">
+                            <td>{{item.temperatura}} °C</td>
+                            <td>{{item.umidade}} %</td>
+                            <td>{{item.hora}} Hs</td>
+                            <td>{{item.data}}</td>
+                            <td><a class="btn-deletar mdi-content-remove-circle" ng-click="dados.$remove(item)">Remover</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <style>
+
+                #map_container {
+                    position: relative;
+                    padding-top: 50%;
+                    width: 100%;
+                    margin: 0 auto;
+                }
+                #map {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                }
+                #repeat{
+                    display: inline;
+                }
+                #names {
+                    cursor: pointer;
+                }
+            </style>
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <h3 class="box-title">Monitoramento - Localização</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="map_container">
+                                <div id="map"></div>
+                                <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+                                    <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+                                        <label id="names" >{{marker.title}}</label></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- ./col -->
+                <div class="col-md-6">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <i class="fa fa-text-width"></i>
+
+                            <h3 class="box-title">Monitoramento - Temperatura</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body clearfix">
+
+                            <canvas id="myChart"></canvas>
+
+                            <canvas id="bar" class="chart chart-bar"
+                                    chart-data="date" chart-labels="labels"> chart-series="series"
+                            </canvas>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- ./col -->
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user-2">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-yellow">
+                            <div class="widget-user-image">
+                                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                            </div>
+                            <!-- /.widget-user-image -->
+                            <h3 class="widget-user-username">Marcelo Alves</h3>
+                            <h5 class="widget-user-desc">Lead Developer</h5>
+                        </div>
+                        <div class="box-footer no-padding">
+                            <ul class="nav nav-stacked">
+                                <li><a href="#">Latitude <span class="pull-right badge bg-blue">{{gps.lat}}</span></a></li>
+                                <li><a href="#">Longitude <span class="pull-right badge bg-blue">{{gps.lon}}</span></a></li>
+                                <li><a href="#">Nível Bateria <span class="pull-right badge bg-green">{{bateria}}</span></a></li>
+                                <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-aqua-active">
+                            <h3 class="widget-user-username">Alexander Pierce</h3>
+                            <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+                        </div>
+                        <div class="widget-user-image">
+                            <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                        </div>
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">3,200</h5>
+                                        <span class="description-text">SALES</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">13,000</h5>
+                                        <span class="description-text">FOLLOWERS</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <h5 class="description-header">35</h5>
+                                        <span class="description-text">PRODUCTS</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                    <!-- Widget: user widget style 1 -->
+                    <div class="box box-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-black" style="background: url('../dist/img/photo1.png') center center;">
+                            <h3 class="widget-user-username">Elizabeth Pierce</h3>
+                            <h5 class="widget-user-desc">Web Designer</h5>
+                        </div>
+                        <div class="widget-user-image">
+                            <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
+                        </div>
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">3,200</h5>
+                                        <span class="description-text">SALES</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">13,000</h5>
+                                        <span class="description-text">FOLLOWERS</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <h5 class="description-header">35</h5>
+                                        <span class="description-text">PRODUCTS</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                 aria-valuemin="0" aria-valuemax="100" style="width:{{temperatura}}%">
+                {{temperatura}} C
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                 aria-valuemin="0" aria-valuemax="100" style="width:{{umidade}}%">
+                {{umidade}} %
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-lightbulb-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">
+                                    <span>{{statusLuz}}</span>
+                                </div>
+                                <div>Lampada</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <a class="btn btn-success btn-block" ng-click="liga()">LIGA</a>
+                            <a class="btn btn-danger btn-block" ng-click="desliga()">DESLIGA</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-mixcloud fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">
+                                    <span>{{umidade}}</span>
+                                    <small> %</small>
+                                </div>
+                                <div>Umidade</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-lock fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">
+                                    <span>{{temperatura}}</span>
+                                    <small> C</small>
+                                </div>
+                                <div>Temperatura</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <a class="pull-left" href="/climatizacao">Relatório</a>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-sun-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">12V</div>
+                                <div>Energia Solar</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

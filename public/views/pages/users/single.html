@@ -1,0 +1,134 @@
+<!--	Se o usuário estiver logado mostre isso  	-->
+<div ng-if="main.loggedIn">
+
+
+	<!-- START MAIN -->
+	<div id="main">
+
+		<div class="page-header">
+			<span ng-if="user.type == 'create'">
+			<!--breadcrumbs start-->
+			<div id="breadcrumbs-wrapper" class=" grey lighten-3" ng-if="main.loggedIn">
+				<div class="container">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="breadcrumbs-title">Cadastrar Cliente</h5>
+						<ol class="breadcrumb">
+							<li><a href="/">Dashboard</a></li>
+							<li><a href="/users">Clientes</a></li>
+							<li class="active">Novo Cliente</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div><!--breadcrumbs end-->
+	</span>
+
+	<span ng-if="user.type == 'edit'">
+		<!--breadcrumbs start-->
+		<div id="breadcrumbs-wrapper" class=" grey lighten-3" ng-if="main.loggedIn">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="breadcrumbs-title">Editar Cliente</h5>
+						<ol class="breadcrumb">
+							<li><a href="/">Dashboard</a></li>
+							<li><a href="/users">Clientes</a></li>
+							<li class="active">Editar</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--breadcrumbs end-->
+	</span>
+		</div>
+
+
+		<!-- START WRAPPER -->
+		<div class="wrapper">
+
+			<!--start container-->
+			<div class="container">
+				<div class="section">
+
+					<!--	Se o usuário estiver logado mostre o dashboard  	-->
+					<div ng-if="main.loggedIn">
+						<form class="form-horizontal jumbotron" ng-submit="user.saveUser()">
+
+							<div id="profile-page-header" class="card">
+								<figure class="card-profile-image">
+									<img src="assets/images/avatar.jpg" alt="profile image" class="circle z-depth-2 responsive-img activator">
+								</figure>
+								<br>
+								<div class="card-content">
+									<div class="row">
+										<br>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Nome</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" ng-model="user.userData.name">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Username</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" ng-model="user.userData.username">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" ng-model="user.userData.email">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Password</label>
+											<div class="col-sm-6">
+												<input type="password" class="form-control" ng-model="user.userData.password">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-6">
+												<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="user.type == 'create'">Cadastrar Cliente</button>
+												<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="user.type == 'edit'">Atualizar Cliente</button>
+											</div>
+										</div>
+
+										<div class="row show-hide-message" ng-show="user.message">
+
+											<div id="card-alert" class="card red">
+												<div class="card-content white-text">
+													<br>
+													<p><i class="mdi-alert-error"></i> {{ user.message }}</p>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end container-->
+
+
+	</div>
+	<!-- END WRAPPER -->
+</div>
+<!-- END MAIN -->
+
+
+
+
+
+
+
+

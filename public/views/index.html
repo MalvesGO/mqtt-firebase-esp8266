@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/plain; charset=utf-8" />
+	<title>Kaverna Digital</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Energia solar, painel solar">
+	<meta name="author" content="Marcelo Alves">
+	<!-- FOR ANGULAR ROUTING -->
+	<base href="/">
+
+	<link href="assets/css/sweetalert.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/estilo.css">
+	<link rel="stylesheet" href="assets/css/adminLte.min.css">
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+	<link rel="stylesheet" href="assets/js/ng-notify/src/styles/ng-notify.css">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi7m-HP40cK5DYCpcUTW7pInO-GQ80v_M"></script>
+
+
+</head>
+
+<ng-include src="'views/pages/partials/navbar.html'"></ng-include>
+
+<body ng-app="userApp" ng-controller="mainController as main">
+
+<div ng-view></div>
+
+<!--<ng-include ng-if="!main.loggedIn" src="'app/views/pages/partials/footer.html'"></ng-include>  -->
+
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/sweetalert.min.js"></script>
+
+<!-- load angular and angular-route via CDN -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-animate.js"></script>
+<!-- load ngmessages -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+
+<!-- load momentJS (required for angular-moment) -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<!-- load angular-moment -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/pt-br.js" ></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-morris/1.3.0/angular-morris.min.js"></script>
+
+<script src="assets/js/chart.js/dist/Chart.min.js"></script>
+<script src="assets/js/angular-chart.js/dist/angular-chart.min.js" ></script>
+
+<script src="assets/js/zingchart/client/zingchart.min.js"></script>
+<script src="assets/js/zingchart-angularjs/src/zingchart-angularjs.js"></script>
+<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-mask/1.8.7/mask.min.js"></script>
+<script src="assets/js/ng-notify/src/scripts/ng-notify.js"></script>
+<script src="assets/js/mqttws31.js" ></script>
+<script src="assets/js/angular-paho.js"></script>
+
+<!-- controllers -->
+<script src="controllers/mainCtrl.js"></script>
+<script src="controllers/mqttCtrl.js"></script>
+<script src="controllers/firebaseCtrl.js"></script>
+
+<!-- main Angular app files -->
+<script src="app.routes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

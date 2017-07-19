@@ -1,0 +1,18 @@
+<div class="jumbotron text-center">
+	<!--	Se o usuário não estiver logado mostre isso  	-->
+	<div ng-if="!main.loggedIn">
+		<p>Para visualizar esse conteudo voce deve fazer login.</p>
+		<a href="/login" class="btn btn-primary">Login</a>
+
+
+	</div>
+
+	<!--	Se o usuário estiver logado mostre isso  	-->
+	<div ng-if="main.loggedIn">
+		<h1>{{name}}</h1>
+		esta area sera monitoramento de energia eletrica
+	</div>
+</div>
+
+
+

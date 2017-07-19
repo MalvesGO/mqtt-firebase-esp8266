@@ -1,0 +1,52 @@
+<div class="row" style="padding-top: 1.5cm">
+    <h2 class="text-center branco"> <i class="fa fa-envelope"></i> <strong>Mensagem recebida de: {{ mensagem.mensagemData.nome }}</strong></h2>
+</div>
+
+<br>
+
+<div class="container">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4><strong>Assunto: </strong>{{ mensagem.mensagemData.assunto }}</h4></div>
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="col-md-6" ng-controller="userController as user">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-info-circle"></i> Informações</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>Nome: {{ mensagem.mensagemData.nome }}</li>
+                                <li>Email: {{ mensagem.mensagemData.email }}</li>
+                                <li>Telefone: {{ mensagem.mensagemData.telefone }}</li>
+                                <li>Data da Mensagem: {{ mensagem.mensagemData.data }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-controller="clienteController as cliente">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-envelope"></i> Mensagem</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ mensagem.mensagemData.mensagem }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a  class="btn btn-primary center-block" href="/mensagens"> <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                 Voltar</a>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,86 @@
+<div class='laranja'>
+    <div class="row" style="padding-top: 1.5cm">
+        <div class="container">
+            <h3 class="text-center branco">A empresa <strong>Kaverna Digital</strong> valoriza as suas sugestões e está aberta para esclarecer possíveis dúvidas.
+                Teremos grande prazer em responder sua mensagem.</h3>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="col-md-6">
+            <!-- Embedded Google Map -->
+            <br>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.168583443015!2d-49.37315865469267!3d-16.71843814772489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935e58a145e8393f%3A0xb3120bdcc8c83fa9!2sArduino+Gyn!5e0!3m2!1spt-BR!2sbr!4v1493926633284" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6">
+
+            <h3 class="branco"><strong>Envie sua mensagem</strong></h3>
+            <form name="mensagemForm" ng-submit="mensagem.saveMensagem()">
+
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Nome:</label>
+                        <input type="text" name="nome" class="form-control"
+                               ng-model="mensagem.mensagemData.nome"
+                               ng-minlength="5"
+                               ng-maxlength="30"
+                               required>
+                        <div class="help-block" ng-messages="mensagemForm.nome.$error" ng-if="mensagemForm.nome.$touched">
+                            <div ng-messages-include="app/views/pages/partials/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Telefone:</label>
+                        <input  name="telefone" class="form-control" ng-model="mensagem.mensagemData.telefone"  ui-mask="(99) 99999-999?9" model-view-value="true" />
+                        <div class="help-block"></div>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Email:</label>
+                        <input class="form-control" id="email" ng-model="mensagem.mensagemData.email" type="text">
+                        <div class="help-block"></div></div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Assunto:</label>
+                        <input class="form-control" id="email" ng-model="mensagem.mensagemData.assunto" type="text">
+                        <div class="help-block"></div></div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Menssagem:</label>
+                        <textarea rows="10" cols="100" class="form-control" ng-model="mensagem.mensagemData.mensagem"></textarea>
+                        <div class="help-block"></div></div>
+                </div>
+                <div id="success"></div>
+                <!-- For success/fail messages -->
+                <button type="submit" class="btn btn-lg btn-primary" ng-if="mensagem.type == 'create'">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <img class="img-responsive" src="assets/img/cidadesolar.png" alt="">
+</div>
+
+<div class='verde'>
+    <div class="row" style="padding-top: 0.5cm">
+        <div class="container">
+            <div class="col-md-6"> <h2 class="branco">Entre em contato</h2></div>
+            <div class="col-md-6">
+                <h2 class="branco pull-right">
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                (62) 98111-2793
+                </h2>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+</div>
+
+

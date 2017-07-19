@@ -1,0 +1,52 @@
+<script>
+    $(document).on('click','.navbar-collapse.in',function(e) {
+        if( $(e.target).is('a') ) {
+            $(this).collapse('hide');
+        }
+    });
+</script>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">
+                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                 Kaverna Digital
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav"  ng-if="main.loggedIn">
+                <li><a href="/dashboard" class="selected"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a href="/users" class="selected">Usuários</a></li>
+                <li><a href="/clientes" >Clientes</a></li>
+                <li><a href="/produtos" >Produtos</a></li>
+                <li><a href="/casa" ><i class="fa fa-home"></i> Casa</a></li>
+                <li class=""><a href="/mensagens"><span class="fa fa-envelope"></span> Mensagens</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" ng-if="main.loggedIn">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user-circle-o"> </span> {{ main.user.name }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> {{ main.user.email }}</a></li>
+                        <li><a class="btn btn-danger " href="#" ng-click="main.doLogout()">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="!main.loggedIn">
+                <li><a href="/" class="selected"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a href="/sobre" class="selected"><i class="fa fa-rss " aria-hidden="true"></i> Quem Somos</a></li>
+                <li><a href="/contato"><i class="fa fa-envelope" aria-hidden="true"></i> Contato</a></li>
+                <li><a href="/catalogo"><i class="fa fa-shopping-cart" ></i> Loja Virtual</a></li>
+                <li><a href="/iot"><i class="fa fa-shopping-cart" ></i> Iot</a></li>
+                <li><a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> Área Restrita</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

@@ -1,0 +1,84 @@
+<div class="row" style="padding-top: 1.5cm">
+    <h2 class="text-center branco"><strong>Listagem de Clientes</strong></h2>
+</div>
+
+<br>
+
+<div class="container-fluid cards-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="person in cliente.clientes | filter:busca">
+                <div class="thumbnail">
+                    <img class="responsive-img" src="{{ person.img }}">
+                    <div class="caption">
+                        <h3 class="text-center">{{ person.nome }}</h3>
+                        <p class="card-description"><strong>Bootstrap Thumbnail</strong> Customization Example. Here are customized <strong>bootstrap cards</strong>. We just apply some box shadow and remove border radius.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Comprar</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="panel-title padFix">Clientes cadastrados no momento: <span class="badge">{{ cliente.clientes.length }}</span></h3></div>
+                    <div class="col-sm-6">
+                        <form role="search">
+                            <div class="input-group">
+                                <input type="text"  class="form-control" ng-model="busca.nome " placeholder="Buscar cliente...">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="jumbotron text-center" ng-show="user.processing">
+                    <span class="glyphicon glyphicon-repeat spinner"></span>
+                    <p>Carregando Usuários...</p>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="info">
+                        <th>Editar</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Assunto</th>
+                        <th>Mensagem</th>
+                        <th>Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in cliente.clientes | filter:busca">
+                        <td><a ng-href="/clientes/{{ person._id }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                        <td>{{ person.nome }}</td>
+                        <td>{{ person.email }}</td>
+                        <td>{{ person.telefone }}</td>
+                        <td>{{ person.assunto }}</td>
+                        <td>{{ person.mensagem }}</td>
+                        <td><a ng-click="cliente.deletecliente(person._id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/clientes/create" class="btn btn-success center-block">Novo cliente</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

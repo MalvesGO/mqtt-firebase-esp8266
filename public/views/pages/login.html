@@ -1,0 +1,37 @@
+<div class='home'>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h1 class="text-center login-title">Efetue login para acessar o sistema</h1>
+				<div class="account-wall">
+					<img class="profile-img" src="assets/img/team/img-1.jpg" alt="">
+					<form ng-submit="login.doLogin()" class="form-signin">
+						<input ng-model="login.loginData.username" type="text" class="form-control", placeholder="Nome">
+						<input ng-model="login.loginData.password" type="password", class="form-control", placeholder="Senha">
+
+						<button ng-show="!login.processing" class="btn btn-lg btn-primary btn-block" type="submit">
+							Login
+						</button>
+
+						<button ng-show="login.processing" class="btn btn-lg btn-primary btn-block">
+							<span class="fa fa-gear fa-spin"></span>
+						</button>
+
+						<a href="#" class="pull-right need-help">Precisa de ajuda? </a><span class="clearfix"></span>
+						<br>
+						<div class="alert alert-danger text-center" role="alert"  ng-if="login.error">
+							{{ login.error }}
+						</div>
+					</form>
+					<a href="#" class="text-center new-account">Criar uma conta </a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<br>
+	<img class="img-responsive" src="assets/img/cidadesolar.png" alt="">
+</div>
+
+
+

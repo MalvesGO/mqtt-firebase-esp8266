@@ -1,0 +1,83 @@
+{
+  "_args": [
+    [
+      "zingchart",
+      "/home/marcelo/WebstormProjects/17-user-crm"
+    ]
+  ],
+  "_from": "zingchart@latest",
+  "_id": "zingchart@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/zingchart",
+  "_nodeVersion": "6.1.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/zingchart-2.5.1.tgz_1480627934174_0.785300828050822"
+  },
+  "_npmUser": {
+    "email": "support@zingchart.com",
+    "name": "zingchart"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "zingchart",
+    "raw": "zingchart",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/zingchart/-/zingchart-2.5.1.tgz",
+  "_shasum": "5ba62e7869cd61d4d946e9cfae5926a79a85b8ad",
+  "_shrinkwrap": null,
+  "_spec": "zingchart",
+  "_where": "/home/marcelo/WebstormProjects/17-user-crm",
+  "author": {
+    "name": "ZingChart"
+  },
+  "bugs": {
+    "url": "https://github.com/zingchart/ZingChart/issues"
+  },
+  "dependencies": {},
+  "description": "A npm package for easy downloading of ZingChart.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "5ba62e7869cd61d4d946e9cfae5926a79a85b8ad",
+    "tarball": "https://registry.npmjs.org/zingchart/-/zingchart-2.5.1.tgz"
+  },
+  "gitHead": "310944a302f03a965b71ed5b49e2f53f4baa495d",
+  "homepage": "https://github.com/zingchart/ZingChart",
+  "keywords": [
+    "chart",
+    "charting",
+    "charts",
+    "charts",
+    "html5",
+    "javascript",
+    "zingchart"
+  ],
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "zingchart",
+      "email": "support@zingchart.com"
+    }
+  ],
+  "name": "zingchart",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zingchart/ZingChart.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.5.1"
+}
