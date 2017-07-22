@@ -1,0 +1,280 @@
+// Coding By IOXhop : http://www.ioxhop.com/
+
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include "DHT.h"
+
+// Update these with values suitable for your network.
+const char* ssid = "marcelo";
+const char* password = "redecasa";
+
+// Config MQTT Server
+#define mqtt_server "m12.cloudmqtt.com"
+#define mqtt_port 10310
+#define mqtt_user "bpfkktrd"
+#define mqtt_password "zdu9SCC_2duo"
+
+#define LED_PIN D7
+#define LED_PIN1 D4
+
+// DHT
+#define DHTPIN D3
+#define DHTTYPE DHT11
+
+// Initialize DHT sensor.
+DHT dht(DHTPIN, DHTTYPE);
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// sleep for this many seconds
+const int sleepSeconds = 30;
+
+void setup() {
+  dht.begin();
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN1, OUTPUT);
+
+    // Connect D0 to RST to wake up
+  pinMode(D0, WAKEUP_PULLUP);
+  
+  Serial.begin(115200);
+  delay(10);
+
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  
+  client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
+}
+
+void loop() {
+  if (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    if (client.connect("ESP8266Client", mqtt_user, mqtt_password)) {
+      Serial.println("connected");
+      client.subscribe("/ESP/LED");
+      client.subscribe("/ESP/LED1");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      delay(5000);
+      return;
+    }
+  }
+  client.loop();
+  //check if 5 seconds has elapsed since the last time we read the sensors. 
+
+      getAndSendTemperatureAndHumidityData();
+      delay(1000);
+          // convert to microseconds
+  ESP.deepSleep(sleepSeconds * 1000000);
+     
+}
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  String msg = "";
+  int i=0;
+  while (i<length) msg += (char)payload[i++];
+  if (msg == "GET") {
+    client.publish("/ESP/LED", (digitalRead(LED_PIN) ? "LEDON" : "LEDOFF"));
+    client.publish("/ESP/LED1", (digitalRead(LED_PIN1) ? "ON" : "OFF"));
+    Serial.println("Send !");
+    return;
+  }
+  digitalWrite(LED_PIN, (msg == "LEDON" ? HIGH : LOW));
+  digitalWrite(LED_PIN1, (msg == "ON" ? HIGH : LOW));
+  Serial.println(msg);
+}
+
+void getAndSendTemperatureAndHumidityData()
+{
+  Serial.println("Collecting temperature data.");
+
+
+  // Reading temperature or humidity takes about 250 milliseconds!
+  float h = dht.readHumidity();
+  // Read temperature as Celsius (the default)
+  float t = dht.readTemperature();
+
+  // Check if any reads failed and exit early (to try again).
+  if (isnan(h) || isnan(t)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return;
+  }
+
+  Serial.print("Humidity: ");
+  Serial.print(h);
+  Serial.print(" %\t");
+  Serial.print("Temperature: ");
+  Serial.print(t);
+  Serial.print(" *C ");
+
+  String temperature = String(t);
+  String humidity = String(h);
+
+
+  // Just debug messages
+  Serial.print( "Sending temperature and humidity : [" );
+  Serial.print( temperature ); Serial.print( "," );
+  Serial.print( humidity );
+  Serial.print( "]   -> " );
+
+  // Prepare a JSON payload string
+  String payload = "{";
+  payload += "\"temperature\":"; payload += temperature; payload += ",";
+  payload += "\"humidity\":"; payload += humidity;
+  payload += "}";
+
+  // Send payload
+  char attributes[100];
+  payload.toCharArray( attributes, 100 );
+  client.publish( "v1/devices/me/telemetry", attributes );
+  Serial.println( attributes );
+  }
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+
+#include <ESP8266WiFi.h>
+#include <Wire.h>
+#include <PubSubClient.h>
+#include "DHT.h"
+
+// DHT
+#define DHTPIN D3
+#define DHTTYPE DHT11
+
+// Initialize DHT sensor.
+DHT dht(DHTPIN, DHTTYPE);
+
+#define wifi_ssid "marcelo"
+#define wifi_password "redecasa"
+
+#define mqtt_server "m12.cloudmqtt.com"
+#define mqtt_user "bpfkktrd"
+#define mqtt_password "zdu9SCC_2duo"
+
+#define humidity_topic "wemos/sensor/humidity"
+#define temperature_topic "wemos/sensor/temperature"
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// sleep for this many seconds
+const int sleepSeconds = 30;
+
+void setup() {
+  Serial.begin(115200);
+  setup_wifi();
+  client.setServer(mqtt_server, 10310);
+  dht.begin();
+    // Connect D0 to RST to wake up
+  pinMode(D0, WAKEUP_PULLUP);
+
+}
+
+void setup_wifi() {
+  delay(10);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(wifi_ssid);
+
+  WiFi.begin(wifi_ssid, wifi_password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    // If you do not want to use a username and password, change next line to
+    // if (client.connect("ESP8266Client")) {
+    if (client.connect("ESP8266Client", mqtt_user, mqtt_password)) {
+      Serial.println("connected");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
+}
+
+bool checkBound(float newValue, float prevValue, float maxDiff) {
+  return !isnan(newValue) &&
+         (newValue < prevValue - maxDiff || newValue > prevValue + maxDiff);
+}
+
+long lastMsg = 0;
+float temp = 0.0;
+float hum = 0.0;
+float diff = 1.0;
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+
+  long now = millis();
+  if (now - lastMsg > 1000) {
+    lastMsg = now;
+
+    float newTemp = dht.readTemperature();
+    float newHum = dht.readHumidity();
+
+    if (checkBound(newTemp, temp, diff)) {
+      temp = newTemp;
+      Serial.print("New temperature:");
+      Serial.println(String(temp).c_str());
+      client.publish(temperature_topic, String(temp).c_str(), true);
+    }
+
+    if (checkBound(newHum, hum, diff)) {
+      hum = newHum;
+      Serial.print("New humidity:");
+      Serial.println(String(hum).c_str());
+      client.publish(humidity_topic, String(hum).c_str(), true);
+    }
+  }
+  delay(1000);
+      // convert to microseconds
+  ESP.deepSleep(sleepSeconds * 1000000);
+
+}
+
